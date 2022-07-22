@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule } from "@angular/material/list";
+import { MatButtonModule } from '@angular/material/button';
 import { TasksListComponent } from './components/tasks-list/tasks-list.component';
 
 @NgModule({
@@ -16,7 +17,8 @@ import { TasksListComponent } from './components/tasks-list/tasks-list.component
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatListModule
+    MatListModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

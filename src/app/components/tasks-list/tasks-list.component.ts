@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ITask } from 'src/app/app.model';
 import { TasksService } from 'src/app/services/tasks-service.service';
 
@@ -7,19 +7,24 @@ import { TasksService } from 'src/app/services/tasks-service.service';
   templateUrl: './tasks-list.component.html',
   styleUrls: ['./tasks-list.component.less']
 })
-export class TasksListComponent implements OnInit {
-  word: any;
+export class TasksListComponent implements OnInit, OnChanges {
+  allTasks: any;
   tasksList: ITask[] = [];
 
   constructor(protected tasksService: TasksService) { }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getAllTasks();
+  }
+
   ngOnInit(): void {
+    this.getAllTasks();
   }
 
   async getAllTasks() {
-    this.word = await this.tasksService.getAllTasks();
-    this.tasksList.push(this.word);
-    console.log(this.word)
+    this.tasksList = await this.tasksService.getAllTasks();
+    // this.tasksList.concat(this.allTasks);
+    console.log(this.allTasks)
   }
 
   async addTask() {
@@ -30,7 +35,7 @@ export class TasksListComponent implements OnInit {
       task_status: 1
     };
     
-    this.word = await this.tasksService.addTask(data);
-    console.log(this.word)
+    this.allTasks = await this.tasksService.addTask(data);
+    console.log(this.allTasks)
   } 
 }

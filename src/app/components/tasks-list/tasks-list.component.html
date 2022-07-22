@@ -1,8 +1,9 @@
-<button (click)="getAllTasks()">hellow</button>
-<button (click)="addTask()">sethellow</button>
-<div>{{word}}</div>
+<h1>taskify</h1>
 <mat-selection-list #tasks>
-  <mat-list-option *ngFor="let task of tasksList">
-    {{task}}
+  <mat-list-option class="tasks-options"  *ngFor="let task of tasksList"    >
+    <div>{{task.task_title}}:</div> 
+    <div>{{task.task_describtion}}</div>
   </mat-list-option>
 </mat-selection-list>
+<br/>
+<button mat-raized-button color="primary" (click)="addTask()">add new task</button>
