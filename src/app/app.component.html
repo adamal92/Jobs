@@ -1,9 +1,2 @@
-<button (click)="getAllTasks()">hellow</button>
-<button (click)="addTask()">sethellow</button>
-<div>{{word}}</div>
-<mat-selection-list #tasks>
-  <mat-list-option *ngFor="let task of tasksList">
-    {{task}}
-  </mat-list-option>
-</mat-selection-list>
+<app-tasks-list></app-tasks-list>
 <router-outlet></router-outlet>
