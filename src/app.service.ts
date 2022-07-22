@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Pool } from 'pg';
 import { ITask } from './app.model';
+import appConfig from './app.config.json';
 
 @Injectable()
 export class AppService {
@@ -12,11 +13,11 @@ export class AppService {
 
   initDBPoll() {
     return new Pool({
-      user: 'postgres', //process.env.DB_USER,
-      host: 'localhost', //process.env.DB_HOST,
-      database: 'postgres', //process.env.DB_DATABASE,
-      password: '123456', //process.env.DB_PASSWORD,
-      port: 5433 //process.env.DB_PORT
+      user: appConfig.user,
+      host: appConfig.host,
+      database: appConfig.database,
+      password: appConfig.password,
+      port: appConfig.port
     });
   }
 
