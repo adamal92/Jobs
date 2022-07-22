@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Req } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { ITask } from './app.model';
 import { AppService } from './app.service';
 
@@ -12,7 +12,7 @@ export class AppController {
   }
 
   @Post()
-  async addTask(@Req() request): Promise<string> {
-    return await this.appService.addTask(await request.json());
+  async addTask(@Body() newTask): Promise<string> {
+    return await this.appService.addTask(newTask);
   } 
 }

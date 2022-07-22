@@ -34,10 +34,8 @@ export class AppService {
   }
 
   async addTask(newTask: ITask): Promise<string> {
-    console.log(newTask)
     const { task_id, task_title, task_describtion, task_status } = newTask;
     const { rows } = await this.pool.query(`INSERT INTO tasks (task_title, task_describtion, task_status) VALUES('${task_title}', '${task_describtion}', ${task_status})`);
-    console.log(rows)
     return `inserted! ${rows}`;
   }
 }
