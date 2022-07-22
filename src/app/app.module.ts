@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule } from "@angular/material/list";
 import { MatButtonModule } from '@angular/material/button';
 import { TasksListComponent } from './components/tasks-list/tasks-list.component';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { TasksListComponent } from './components/tasks-list/tasks-list.component
     AppRoutingModule,
     BrowserAnimationsModule,
     MatListModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

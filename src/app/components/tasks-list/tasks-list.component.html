@@ -5,5 +5,18 @@
     <div>{{task.task_describtion}}</div>
   </mat-list-option>
 </mat-selection-list>
+
+<form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Add New Task Title</mat-label>
+      <input matInput placeholder="Title" value="new task" [(ngModel)]="title" name="title">
+    </mat-form-field>
+  
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Leave a Describtion</mat-label>
+      <textarea matInput placeholder="describtion" [(ngModel)]="describtion" name="desc"></textarea>
+    </mat-form-field>
+</form>
+  
 <br/>
 <button mat-raized-button color="primary" (click)="addTask()">add new task</button>
