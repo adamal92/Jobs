@@ -39,4 +39,9 @@ export class AppService {
     const { rows } = await this.pool.query(`INSERT INTO tasks (task_title, task_describtion, task_status) VALUES('${task_title}', '${task_describtion}', ${task_status})`);
     return `inserted! ${rows}`;
   }
+
+  async deleteTask(taskId) {
+    const { rows } = await this.pool.query(`DELETE FROM tasks WHERE task_id=${taskId}`);
+    return `deleted ${rows}`;
+  }
 }
