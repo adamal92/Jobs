@@ -30,5 +30,17 @@ export class TasksService {
       body: JSON.stringify(newTask)
     });
     return await res.text();
-  } 
+  }
+  
+  async deleteTask(task_id: number) {
+    const res = await fetch(appConfig.postgreDbUrl, {
+      method: "DELETE",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({task_id})
+    });
+    return await res.text();
+  }
 }

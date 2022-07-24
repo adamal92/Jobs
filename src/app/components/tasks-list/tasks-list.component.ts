@@ -12,6 +12,7 @@ export class TasksListComponent implements OnInit, OnChanges {
   tasksList: ITask[] = [];
   describtion: string = "";
   title: string = "";
+  selectedTasks: ITask[] = [];
 
   constructor(protected tasksService: TasksService) { }
 
@@ -23,13 +24,16 @@ export class TasksListComponent implements OnInit, OnChanges {
     this.getAllTasks();
   }
 
+  onNgModelChange(event: any): void {
+    console.log(event)
+    console.log(this.selectedTasks)
+  }
+
   async getAllTasks() {
     this.tasksList = await this.tasksService.getAllTasks();
-    console.log(this.allTasks)
   }
 
   async addTask() {
-    console.log(this.describtion, this.title)
     const data: ITask = {
       task_id: 2,
       task_title: this.title,
@@ -40,5 +44,10 @@ export class TasksListComponent implements OnInit, OnChanges {
     // this.allTasks = await this.tasksService.addTask(data);
     console.log(await this.tasksService.addTask(data))
     this.getAllTasks()
-  } 
+  }
+
+  async deleteTask(task_id: number) {
+    await this.tasksService.deleteTask(task_id);
+    this.getAllTasks();
+  }
 }
