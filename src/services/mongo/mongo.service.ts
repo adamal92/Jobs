@@ -23,12 +23,40 @@ export class MongoService {
         this.client.close();
     }
 
-    async getAllTasks() {
-        this.connect();
-        return this.collection?.find({}).toArray();
+    async getAllTasks(newTask: ITask) {
+        // this.connect();
+        // return this.collection?.find({}).toArray();
+        const mongoose = require('mongoose');
+        mongoose.connect(appConfig.mongoConnectionString, {useNewUrlParser: true, useUnifiedTopology: true});
+        const db = mongoose.connection;
+        db.on('error', console.error.bind(console, 'connection error:'));
+        db.once('open', function() {
+            console.log("connected!!!!!!!!!!!!!!!!")
+        // we're connected!
+        });
+        const TaskSchema = new mongoose.Schema({
+            task: {
+                task_id: Number,
+                task_title: String,
+                task_describtion: String,
+                task_status: Number
+            } 
+        }, { collection: 'mongo.tasks' });
+
+        let TaskModel = mongoose.model('Task', TaskSchema);
+        const tasksModel = new TaskModel({ task: newTask });
+        tasksModel.save(function (err, tasks) {
+            if (err) return console.error(err);
+          });
+        TaskModel.find(function (err, tasks) {
+            if (err) return console.error(err);
+            console.log(tasks);
+        })
     }
 
     async addTask(newTask: ITask) {
+        this.getAllTasks(newTask);
+        return
         const mongoose = require('mongoose');
         mongoose.connect(appConfig.mongoConnectionString, {useNewUrlParser: true, useUnifiedTopology: true});
         const db = mongoose.connection;
