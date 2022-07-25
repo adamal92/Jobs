@@ -10,15 +10,8 @@ export class AppService {
   }
 
   async getAllTasks(): Promise<ITask[]> {
-    // try {
-    // this.mongoService.connect();
-
-      // console.log(this.mongoService.getAllTasks());
-
+      console.log(this.mongoService.getAllTasks());
       return this.postgresqlService.getAllTasks();
-    // } catch(e) {
-      // return this.mongoService.getAllTasks();
-    // }
   }
 
   async addTask(newTask: ITask): Promise<string> {
