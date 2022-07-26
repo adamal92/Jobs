@@ -22,6 +22,11 @@ export class AppService {
     return this.postgresqlService.addTask(newTask);
   }
 
+  async updateTask(updatedTask: ITask) {
+    this.mongoService.updateTask(updatedTask);
+    return await this.postgresqlService.updateTask(updatedTask);
+  }
+
   async deleteTask(taskId) {
     this.mongoService.deleteTask(taskId);
     return this.postgresqlService.deleteTask(taskId);

@@ -30,7 +30,6 @@ export class PostgresqlService {
   
     async getAllTasks(): Promise<ITask[]> {
       const { rows } = await this.pool.query('SELECT * FROM tasks');
-      console.log(rows)
       return rows;
     }
   
@@ -38,6 +37,12 @@ export class PostgresqlService {
       const { task_id, task_title, task_describtion, task_status } = newTask;
       const { rows } = await this.pool.query(`INSERT INTO tasks (task_title, task_describtion, task_status) VALUES('${task_title}', '${task_describtion}', ${task_status})`);
       return `inserted! ${rows}`;
+    }
+
+    async updateTask(updatedTask: ITask) {
+      const { task_id, task_title, task_describtion, task_status } = updatedTask;
+      const { rows } = await this.pool.query(`UPDATE tasks SET task_id=${task_id}, task_title='${task_title}', task_describtion='${task_describtion}', task_status=${task_status} WHERE task_id=${task_id}`);
+      return `updated ${rows}`;
     }
   
     async deleteTask(taskId) {

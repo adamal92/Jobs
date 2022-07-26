@@ -46,7 +46,12 @@ export class MongoService {
           });        
     }
 
+    async updateTask(updatedTask: ITask) {
+        const task_id = updatedTask.task_id;
+        this.TaskModel.updateOne({ task: { task_id } }, { task: updatedTask });
+    }
+
     async deleteTask(taskId) {
-        return this.TaskModel.deleteOne({ task: { taskId} });
+        return this.TaskModel.deleteOne({ task: { taskId } });
     }
 }

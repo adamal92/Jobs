@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Post, Req } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Put, Req } from '@nestjs/common';
 import { ITask } from './app.model';
 import { AppService } from './app.service';
 
@@ -16,6 +16,11 @@ export class AppController {
     return await this.appService.addTask(newTask);
   }
   
+  @Put()
+  async updateTask(@Body() updatedTask: ITask) {
+    return await this.appService.updateTask(updatedTask);
+  }
+
   @Delete()
   async deleteTask(@Body() taskInfo): Promise<string> {
     return await this.appService.deleteTask(taskInfo.task_id);
