@@ -1,42 +1,29 @@
-<h1>taskify</h1>
-<!-- <ul>
-  <li *ngFor="let task of tasksList">
-    <mat-checkbox [(ngModel)]="selectedTasks"
-                  [color]="'black'"
-                  (ngModelChange)="onNgModelChange($event)">
+<mat-toolbar>
+  <h1>taskify</h1>
+</mat-toolbar>
+<mat-selection-list #tasks [(ngModel)]="selectedTasks">
+  <div  *ngFor="let task of tasksList">
+    <mat-list-option (click)="onSelected(task)" class="tasks-options">
+      <span>
         <div>{{task.task_title}}:</div>
         <div>{{task.task_describtion}}</div>
-    </mat-checkbox>
-  </li>
-</ul>  -->
-<mat-selection-list #tasks [(ngModel)]="selectedTasks" (ngModelChange)="onNgModelChange($event)">
-  <mat-list-option #option style="display: block" (click)="onSelected(option, task)" class="tasks-options" id="opt" style="color: black;" *ngFor="let task of tasksList">
-    <!-- <style>.mat-pseudo-checkbox{color: black !important ;}
-    body > app-root > app-tasks-list > mat-selection-list > mat-list-option > div > mat-pseudo-checkbox {
-      color: black !important
-    }
-    #opt {
-      color: black !important
-    }
-    /* button.delete-task {
-      padding: 400px;
-    } */
-    </style> -->
-    <span>
-      <div>{{task.task_title}}:</div>
-      <div>{{task.task_describtion}}</div>
-    </span>
+      </span>
+    </mat-list-option>
     <br/>
-    <button mat-raized-button color="black" class="delete-task" (click)="deleteTask(task.task_id)">delete</button>
+    <button mat-flat-button color="warn" class="delete-task" (click)="deleteTask(task.task_id)">delete</button>
     <br/>
-  </mat-list-option>
+  </div>
 </mat-selection-list>
+
+<br/>
 
 <form class="example-form">
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Add New Task Title</mat-label>
       <input matInput placeholder="Title" value="new task" [(ngModel)]="title" name="title">
     </mat-form-field>
+
+    <br/>
   
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Leave a Describtion</mat-label>
@@ -45,4 +32,4 @@
 </form>
   
 <br/>
-<button mat-raized-button color="primary" (click)="addTask()">add new task</button>
+<button mat-flat-button color="primary" (click)="addTask()">add new task</button>

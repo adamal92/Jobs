@@ -1,5 +1,5 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { MatListOption } from '@angular/material/list';
+import { Component, OnInit } from '@angular/core';
+import { MatListOption, MatSelectionListChange } from '@angular/material/list';
 import { ITask, TaskStatus } from 'src/app/app.model';
 import { TasksService } from 'src/app/services/tasks-service.service';
 
@@ -8,7 +8,7 @@ import { TasksService } from 'src/app/services/tasks-service.service';
   templateUrl: './tasks-list.component.html',
   styleUrls: ['./tasks-list.component.less']
 })
-export class TasksListComponent implements OnInit, OnChanges {
+export class TasksListComponent implements OnInit {
   allTasks: any;
   tasksList: ITask[] = [];
   describtion: string = "";
@@ -17,21 +17,15 @@ export class TasksListComponent implements OnInit, OnChanges {
 
   constructor(protected tasksService: TasksService) { }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.getAllTasks();
-  }
-
   ngOnInit(): void {
     this.getAllTasks();
   }
 
-  async onSelected(option: MatListOption, task: ITask) {
+  async onSelected(task: ITask) {
+    task.task_id = task.task_status === TaskStatus.TODO ? TaskStatus.DONE : TaskStatus.TODO;
     await this.deleteTask(task.task_id);
-    task.task_status = option.selected ? TaskStatus.DONE : TaskStatus.TODO;
-    this.tasksService.addTask(task);
+    await this.tasksService.addTask(task);
   }
-
-  onNgModelChange(event: any): void {}
 
   async getAllTasks() {
     this.tasksList = await this.tasksService.getAllTasks();
@@ -39,10 +33,10 @@ export class TasksListComponent implements OnInit, OnChanges {
 
   async addTask() {
     const data: ITask = {
-      task_id: 2,
+      task_id: NaN,
       task_title: this.title,
       task_describtion: this.describtion,
-      task_status: 1
+      task_status: TaskStatus.TODO
     };
     
     // this.allTasks = await this.tasksService.addTask(data);

@@ -10,6 +10,7 @@ import { TasksListComponent } from './components/tasks-list/tasks-list.component
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatButtonModule,
     MatInputModule,
     MatCheckboxModule,
+    MatToolbarModule,
     FormsModule
   ],
   providers: [],
