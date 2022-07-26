@@ -1,4 +1,3 @@
-import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import { MatListOption } from '@angular/material/list';
 import { ITask, TaskStatus } from 'src/app/app.model';
@@ -28,20 +27,22 @@ export class TasksListComponent implements OnInit {
     })
   }
 
-  async onSelected(task: ITask, selectionModel: SelectionModel<MatListOption> ): Promise<void> {
-    this.unselectAll();
+  isSelectedOption(opt: MatListOption) {
     let gotSelected: boolean = false;
-    console.log(selectionModel.selected)
-    selectionModel.selected.forEach((opt: MatListOption) => {
-      console.log(opt.value.task_status)
-      console.log(opt)
-      if(opt.value.task_status === task.task_id) {
-        task.task_status = TaskStatus.TODO;
+    this.tasksList.forEach((task: ITask) => {
+      if(opt.value.task_id === task.task_id) {
+        task.task_status = TaskStatus.DONE;
         gotSelected = true;
-      }  
+      }
     });
-    task.task_status = gotSelected ? task.task_status : TaskStatus.DONE;
-    console.log(task.task_status)
+    return gotSelected;    
+  }
+
+  async onSelected(task: ITask, selected: MatListOption[]): Promise<void> {
+    this.unselectAll();
+    selected.forEach((opt: MatListOption) => { 
+      task.task_status = this.isSelectedOption(opt) ? task.task_status : TaskStatus.TODO;
+    });
     await this.tasksService.updateTask(task);
     await this.getAllTasks();
   }

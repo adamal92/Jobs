@@ -3,7 +3,7 @@
 </mat-toolbar>
 <mat-selection-list #tasks [(ngModel)]="selectedTasks">
   <div *ngFor="let task of tasksList">
-    <mat-list-option [value]="task" [selected]="task.task_status === 0" (click)="onSelected(task, tasks.selectedOptions)" class="tasks-options">
+    <mat-list-option [value]="task" [selected]="task.task_status === 0" (click)="onSelected(task, tasks.selectedOptions.selected)" class="tasks-options">
       <span>
         <div>{{task.task_title}}:</div>
         <div>{{task.task_describtion}}</div>
