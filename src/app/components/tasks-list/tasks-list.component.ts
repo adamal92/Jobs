@@ -1,4 +1,5 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { MatListOption } from '@angular/material/list';
 import { ITask } from 'src/app/app.model';
 import { TasksService } from 'src/app/services/tasks-service.service';
 
@@ -22,6 +23,12 @@ export class TasksListComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.getAllTasks();
+  }
+
+  onSelected(option: MatListOption, task: ITask) {
+    if(option.selected) {
+      
+    }
   }
 
   onNgModelChange(event: any): void {
