@@ -4,5 +4,5 @@
     "database": "postgres",
     "password": "123456",
     "port": 5433,
-    "mongoConnectionString": "mongodb+srv://mongodb:wkdWNLWwGZRlz6Vv@cluster0.amvweu7.mongodb.net/?retryWrites=true&w=majority"
+    "mongoConnectionString": "mongodb+srv://mongodb:"
   }
