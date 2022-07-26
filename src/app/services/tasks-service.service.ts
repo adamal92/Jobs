@@ -32,6 +32,17 @@ export class TasksService {
     return await res.text();
   }
   
+  async updateTask(task: ITask) {
+    return (await fetch(appConfig.backendUrl, {
+      method: "PUT",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(task)
+    })).text();
+  }
+
   async deleteTask(task_id: number) {
     const res = await fetch(appConfig.backendUrl, {
       method: "DELETE",
