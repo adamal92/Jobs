@@ -1,6 +1,6 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MatListOption } from '@angular/material/list';
-import { ITask } from 'src/app/app.model';
+import { ITask, TaskStatus } from 'src/app/app.model';
 import { TasksService } from 'src/app/services/tasks-service.service';
 
 @Component({
@@ -25,16 +25,13 @@ export class TasksListComponent implements OnInit, OnChanges {
     this.getAllTasks();
   }
 
-  onSelected(option: MatListOption, task: ITask) {
-    if(option.selected) {
-      
-    }
+  async onSelected(option: MatListOption, task: ITask) {
+    await this.deleteTask(task.task_id);
+    task.task_status = option.selected ? TaskStatus.DONE : TaskStatus.TODO;
+    this.tasksService.addTask(task);
   }
 
-  onNgModelChange(event: any): void {
-    console.log(event)
-    console.log(this.selectedTasks)
-  }
+  onNgModelChange(event: any): void {}
 
   async getAllTasks() {
     this.tasksList = await this.tasksService.getAllTasks();
