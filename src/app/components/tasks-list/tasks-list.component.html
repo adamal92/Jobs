@@ -2,7 +2,7 @@
   <h1>taskify</h1>
 </mat-toolbar>
 <mat-selection-list #tasks [(ngModel)]="selectedTasks">
-  <div  *ngFor="let task of tasksList">
+  <div *ngFor="let task of tasksList">
     <mat-list-option (click)="onSelected(task)" class="tasks-options">
       <span>
         <div>{{task.task_title}}:</div>

@@ -10,7 +10,7 @@ export class TasksService {
   constructor() { }
 
   async getAllTasks(): Promise<ITask[]> {
-    const res = await fetch(appConfig.postgreDbUrl, {
+    const res = await fetch(appConfig.backendUrl, {
       method: "GET",
       headers: {
         "Access-Control-Allow-Origin": "*"
@@ -21,7 +21,7 @@ export class TasksService {
   }
 
   async addTask(newTask: ITask) {
-    const res = await fetch(appConfig.postgreDbUrl, {
+    const res = await fetch(appConfig.backendUrl, {
       method: "POST",
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -33,7 +33,7 @@ export class TasksService {
   }
   
   async deleteTask(task_id: number) {
-    const res = await fetch(appConfig.postgreDbUrl, {
+    const res = await fetch(appConfig.backendUrl, {
       method: "DELETE",
       headers: {
         "Access-Control-Allow-Origin": "*",

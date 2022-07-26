@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatListOption, MatSelectionListChange } from '@angular/material/list';
 import { ITask, TaskStatus } from 'src/app/app.model';
 import { TasksService } from 'src/app/services/tasks-service.service';
 
@@ -39,9 +38,8 @@ export class TasksListComponent implements OnInit {
       task_status: TaskStatus.TODO
     };
     
-    // this.allTasks = await this.tasksService.addTask(data);
-    console.log(await this.tasksService.addTask(data))
-    this.getAllTasks()
+    await this.tasksService.addTask(data);
+    this.getAllTasks();
   }
 
   async deleteTask(task_id: number) {
